@@ -1,0 +1,255 @@
+/* 
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300);
+
+:root {
+  --primary: #00FCD1;
+  --secondary: #04DFBD;
+  --lighter: #9596A2;
+  --light: #3D4256;
+  --dark: #1E2137;
+  --bg1: #333342;
+  --bg2: #4D4E63;
+  --border-radius: 12px;
+}
+
+
+body {
+  background: linear-gradient(135deg, var(--bg2), var(--bg1));
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.login {
+  width: 420px;
+  background: #ffffff;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &::before {
+    content: "";
+    position: absolute;
+    background: transparent;
+    bottom: 45px;
+    right: 40px;
+    width: 55px;
+    height: 55px;
+    z-index: 5;
+    transition: all 0.6s ease-in-out, background 0s ease;
+  }
+
+  .form {
+    display: block;
+    position: relative;
+
+    h2 {
+      background: #f5f5fa;
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      margin: 0 0 30px 0;
+      padding: 40px;
+      font-weight: 200;
+      color: var(--lighter);
+      font-size: 19px;
+    }
+
+    .form-field {
+      display: flex;
+      align-items: center;
+      height: 55px;
+      margin: 0 40px 30px 40px;
+      border-bottom: 1px solid var(--lighter);
+
+      label {
+        width: 10px;
+        padding: 0 15px 0 0;
+        color: var(--lighter);
+      }
+
+      input {
+        width: 100%;
+        background: transparent;
+        color: var(--lighter);
+        padding: 15px;
+        border: 0;
+        margin: 0;
+
+        & + svg {
+          width: 35px;
+          height: 35px;
+          fill: none;
+          stroke: var(--primary);
+          stroke-width: 7;
+          stroke-linecap: round;
+          stroke-dasharray: 1000;
+          stroke-dashoffset: -100;
+          transition: all 0.3s ease-in-out;
+        }
+
+        &:valid + svg {
+          stroke-dashoffset: 0;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      *::placeholder {
+        color: var(--lighter);
+      }
+    }
+
+    .button {
+      width: 100%;
+      position: relative;
+      cursor: pointer;
+      box-sizing: border-box;
+      padding: 0 40px 45px 40px;
+      margin: 0;
+      border: 0;
+      background: transparent;
+      outline: none;
+
+      .arrow-wrapper {
+        transition: all 0.45s ease-in-out;
+        position: relative;
+        margin: 0;
+        width: 100%;
+        height: 55px;
+        right: 0;
+        float: right;
+        background: linear-gradient(90deg, var(--secondary), var(--primary));
+        box-shadow: 0 3px 20px rgba(var(--primary), 0.4);
+        border-radius: var(--border-radius);
+      
+        .arrow {
+          position: absolute;
+          top: 50%;
+          margin: auto;
+          transition: all 0.45s ease-in-out;
+          right: 35px;
+          width: 15px;
+          height: 2px;
+          background: none;
+          transform: translateY(-50%);
+      
+          &:before {
+            position: absolute;
+            content: '';
+            top: -4px;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid #fff;
+            border-right: 2px solid #fff;
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+}
+} */
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+/* zocial */
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; 
+}
+
+
+h2 {
+  color:rgba(255,255,255,.8);
+  margin-left:12px;
+}
+
+body {
+  background: #272125;
+  font-family: 'Roboto', sans-serif;
+  
+}
+
+form {
+  position:relative;
+  margin: 50px auto;
+  width: 380px;
+  height: auto;
+}
+
+input {
+  padding: 16px;
+  border-radius:7px;
+  border:0px;
+  background: rgba(255,255,255,.2);
+  display: block;
+  margin: 15px;
+  width: 300px;  
+  color:white;
+  font-size:18px;
+  height: 54px;
+}
+
+input:focus {
+  outline-color: rgba(0,0,0,0);
+  background: rgba(255,255,255,.95);
+  color: #e74c3c;
+}
+
+button {
+  float:right;
+  height: 121px;
+  width: 50px;
+  border: 0px;
+  background: #e74c3c;
+  border-radius:7px;
+  padding: 10px;
+  color:white;
+  font-size:22px;
+}
+
+.inputUserIcon {
+  position:absolute;
+  top:68px;
+  right: 80px;
+  color:white;
+}
+
+.inputPassIcon {
+  position:absolute;
+  top:136px;
+  right: 80px;
+  color:white;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Optional: Set minimum height for full viewport */
+}
+.join-link {
+    text-align: center;
+    margin-top: 20px; /* 선택 사항: 필요에 따라 간격 조정 */
+}
+
+input::-webkit-input-placeholder {
+  color: white;
+}
+
+input:focus::-webkit-input-placeholder {
+  color: #e74c3c;
+}

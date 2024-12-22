@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 달의 일기</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/templatemo-style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style>
+      body {
+    font-family: 'Jua', sans-serif;
+  }
+    </style>
+
+    
+  <!--
+    
+TemplateMo 556 Catalog-Z
+
+https://templatemo.com/tm-556-catalog-z
+hero
+-->
+</head>
+<body>
+    <!-- Page Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+
+    </div>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+           🌕
+            달의 일기
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            메뉴
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link nav-link-1 " aria-current="page" href="index.html">일기 모음</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-2" aria-current="page" href="Dairy.html">일기 쓰기</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-3" href="about.html">소개</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-4" href="contact.html">달 추적</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-3" href="login.html">로그아웃</a>
+                </li>
+            </ul>
+        </div>
+       </div>
+    </nav>
+    <Br>
+    <br>
+  <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll"
+    data-image-src="/static/img/hero.jpg">
+    <form class="d-flex tm-search-form">
+      <input class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search">
+
+      <button class="btn btn-outline-success tm-search-btn" type="submit">
+        🔍
+      </button>
+    </form>
+  </div>
+
+  <br>
+  <br>
+
+  <!-- <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll"
+    data-image-src="img/hero.jpg"></div> -->
+
+
+  <div class="col-lg-4 col-12 mb-5">
+    <div class="tm-address-col">
+      <h2 class="tm-text-primary mb-5">오늘의 달 모양 추적 🌕🌔🌓</h2>
+      <p class="tm-mb-50">연구에 따르면 자연 환경에 노출되는 것은 멘탈 능력을 회복하고 스트레스를 감소시킬 수 있습니다. 밤하늘, 행성, 별과 같은 천문학 관측도 비슷한 회복 효과를 가질
+        수 있습니다. 경외감을 불러일으키는 우주를 바라보는 것은 쉽게 주의를 사로잡는 차분한 매력을 제공하여 피로를 회복할 수 있게 해줍니다. </p>
+
+      <ul class="tm-contacts">
+        <li>
+          <a href="https://www.astro4dev.org/flagship-themes/celebrating-our-common-humanity-astronomy/astronomy-mental-health/"
+            class="tm-text-gray">
+            <!-- 타겟 속성을 사용하여 새 창에서 링크 열기 -->
+            <!-- <i class="fas fa-envelope"></i> -->
+            Source: Astronomy for Mental Health
+          </a>
+        </li>
+      </ul>
+      </ul>
+    </div>
+  </div>
+  <div class="col-lg-4 col-12">
+    <h2 class="tm-text-primary mb-5">오늘의 달 🌕️💫</h2>
+
+    <body>
+      <p>
+        월령을 기준으로 29, 0, 1은 삭 신월 (new moon), 2~7까지는 초승달 (Waxing crescent moon),
+        8~13까지는 상현달 (First quarter moon), 14~18 보름달(망) (Full moon),
+        19~ 23 하현달 (Third quarter moon), 24~28 그믐달 (Waning crescent moon)
+        이렇게 총 6가지 단계로 분류했으며, API와 천문 정보 출처는 아래서 확인가능합니다.👇
+      </p>
+      <a href="https://www.kasi.re.kr/kor/publication/post/photoGallery/4296" class="tm-text-gray">
+        천문 정보 Source: 한국천문연구원
+        <br>
+      </a>
+      <a href="https://www.data.go.kr/data/15012689/openapi.do" class="tm-text-gray">
+        API Source: 한국천문연구원_월령 정보| 공공데이터포털
+
+      </a>
+      <br>
+      <br>
+      <!-- 여기서부터 -->
+      <!-- 버튼 클릭 시 getLunarPhase 함수 호출 -->
+      
+      <button onclick="getLunarPhase()">Get Lunar Phase Info</button>
+
+      <!-- 결과를 표시할 div -->
+      <div id="result"></div>
+
+      <!-- 달 이미지를 표시할 img 엘리먼트들 -->
+      <img id="newMoonImage" alt="New Moon Image" class="moon-image">
+      <img id="waxingCrescentMoonImage" alt="Waxing Crescent Moon Image" class="moon-image">
+      <img id="firstQuarterMoonImage" alt="First Quarter Moon Image" class="moon-image">
+      <img id="fullMoonImage" alt="Full Moon Image" class="moon-image">
+      <img id="thirdQuarterMoonImage" alt="Third Quarter Moon Image" class="moon-image">
+      <img id="waningCrescentMoonImage" alt="Waning Crescent Moon Image" class="moon-image">
+
+      <script>
+        function getLunarPhase() {
+            // XMLHttpRequest 객체 생성
+            var xhr = new XMLHttpRequest();
+    
+            // 서버 응답이 완료되면 호출되는 콜백 함수
+            xhr.onreadystatechange = function () {
+                // 서버 응답이 완료되고, 성공적인 응답이면 실행
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        // 서버에서 받은 결과를 displayResult 함수에 전달
+                        displayResult(xhr.responseText);
+                    } else {
+                        // 에러 핸들링 - 콘솔에 에러 출력
+                        console.error('Failed to get lunar phase. Server returned status ' + xhr.status);
+                    }
+                }
+            };
+    
+            // 서버로 요청 보냄
+            xhr.open("GET", "/get_lunar_phase", true);
+            xhr.send();
+        }
+    
+        // 서버에서 받은 결과를 처리하고 이미지를 동적으로 변경하는 함수
+        function displayResult(result) {
+            // 결과를 표시할 div 엘리먼트와 달 이미지를 표시할 img 엘리먼트 가져오기
+            var resultDiv = document.getElementById("result");
+    
+            // 각 이미지의 id 값을 사용하여 가져오도록 수정
+            var newMoonImage = document.getElementById("newMoonImage");
+            var waxingCrescentMoonImage = document.getElementById("waxingCrescentMoonImage");
+            var firstQuarterMoonImage = document.getElementById("firstQuarterMoonImage");
+            var fullMoonImage = document.getElementById("fullMoonImage");
+            var thirdQuarterMoonImage = document.getElementById("thirdQuarterMoonImage");
+            var waningCrescentMoonImage = document.getElementById("waningCrescentMoonImage");
+    
+            resultDiv.innerHTML = result;
+    
+            var lunAge = parseFloat(JSON.parse(result).lunar_phase_info.response.body.items.item.lunAge);
+    
+            // getImagePath 함수에서 반환한 이미지 경로를 설정
+            newMoonImage.src = 'static/img/' + getImagePath(lunAge, 'new_moon.jpg');
+            waxingCrescentMoonImage.src = 'static/img/' + getImagePath(lunAge, 'Waxing_crescent_moon.jpg');
+            firstQuarterMoonImage.src = 'static/img/' + getImagePath(lunAge, 'First_quarter_moon.jpg');
+            fullMoonImage.src = 'static/img/' + getImagePath(lunAge, 'Full_moon.jpg');
+            thirdQuarterMoonImage.src = 'static/img/' + getImagePath(lunAge, 'Third_quarter_moon.jpg');
+            waningCrescentMoonImage.src = 'static/img/' + getImagePath(lunAge, 'Waning_crescent_moon.jpg');
+        }
+    
+        // getImagePath 함수에 이미지 파일 이름을 추가하여 반환
+        function getImagePath(lunAge, fileName) {
+            if (lunAge === 0 || lunAge === 1 || lunAge === 29) {
+                return "new_moon.jpg";
+            } else if (lunAge >= 2 && lunAge <= 7) {
+                return "Waxing_crescent_moon.jpg";
+            } else if (lunAge >= 8 && lunAge <= 13) {
+                return "First_quarter_moon.jpg";
+            } else if (lunAge >= 14 && lunAge <= 18) {
+                return "Full_moon.jpg";
+            } else if (lunAge >= 19 && lunAge <= 23) {
+                return "Third_quarter_moon.jpg";
+            } else {
+                return "Waning_crescent_moon.jpg";
+            }
+        }
+    </script>
+    
+    
+
+<!-- ... (기존 코드) ... -->
+
+
+    </body>
+  </div>
+  </div>
+  </div>
+  </div>
+  <br>
+  <br>
+
+  <script src="/static/js/plugins.js"></script>
+  <script>
+    $(window).on("load", function () {
+      $('body').addClass('loaded');
+    });
+  </script>
+</body>
+
+</html> 

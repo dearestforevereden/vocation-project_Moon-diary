@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+          crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous"></script>
+
+  <title>일기를 써보아요!</title>
+  <!--  파일 업로드 코드 라이브러리-->
+  <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      font-family: 'Do Hyeon', sans-serif;
+    }
+    .posting-box{
+      width: 500px;
+      margin-top: 20px;
+    }
+    .wrap{
+      width: 900px;
+      margin: auto;
+    }
+    .container{
+      padding-left: 50px;
+    }
+    .posting-box > .custom-file {
+      margin-bottom: 20px;
+    }
+  </style>
+
+  <script>
+  $(document).ready(function () {
+    bsCustomFileInput.init();
+    listing();
+  });
+
+  function listing() {
+      $.ajax({
+        type: "GET",
+        url: "/diary",
+        data: {},
+        success: function (response) {
+          let diaries = response['all_diary'];
+          $('#cards-box').empty();
+          for (let i = 0; i < diaries.length; i++) {
+            let title = diaries[i]['title'];
+            let content = diaries[i]['content'];
+            let file = diaries[i]['file'];
+            let diaryId = diaries[i]['_id']; // 일기 ID 추가
+            let temp_html = `<div class="card" data-diary-id="${diaryId}"> <!-- 일기 ID를 data 속성으로 추가 -->
+              <img src="../static/${file}" class="card-img-top">
+              <div class="card-body">
+                <h5 class="card-title">${title}</h5>
+                <p class="card-text">${content}</p>
+                <button class="btn btn-danger delete-button">삭제하기</button>
+              </div>
+            </div>`;
+            $('#cards-box').append(temp_html);
+          }
+        }
+      });
+    }
+
+  function posting() {
+    let title = $('#title').val()
+    let content = $("#content").val()
+    let file = $('#file')[0].files[0]
+
+    let form_data = new FormData()
+    form_data.append("file_give", file)
+    form_data.append("title_give", title)
+    form_data.append("content_give", content)
+
+    $.ajax({
+      type: "POST",
+      url: "/diary",
+      data: form_data,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        alert(response["msg"]);
+        listing();
+      }
+    });
+  }
+
+// 삭제 버튼 클릭 이벤트 핸들러
+$(document).on('click', '.delete-button', function () {
+  const diaryId = $(this).closest('.card').data('diary-id');
+  deleteDiary(diaryId);
+});
+
+
+  // 일기 삭제 함수
+  function deleteDiary(diaryId) {
+  $.ajax({
+    type: 'POST',
+    url: '/delete-diary',
+    data: JSON.stringify({ diaryId: diaryId }), // JSON.stringify를 통해 객체를 JSON 문자열로 변환
+    contentType: 'application/json', // 요청의 Content-Type을 명시
+    success: function (response) {
+      console.log('Server Response:', response);
+      alert(response['msg']);
+      // 삭제 후 일기 목록 다시 불러오기
+      listing();
+    },
+    error: function (error) {
+      console.error('일기 삭제 요청 오류:', error);
+    },
+  })}
+
+  function selectDiary(diaryId) {
+    $.ajax({
+        type: "GET",
+        url: "/diary",
+        data: {},
+        success: function (response) {
+            let diaries = response['all_diary'];
+            for (let i = 0; i < diaries.length; i++) {
+                if (diaries[i]['_id'] == diaryId) {
+                    const content = diaries[i]['content'];
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/select_content_diary",
+                        data: { content: content }, // content query 파라메터 보내기
+                        success: function (response) {
+                            alert(content);
+                        },
+                        error: function (error) {
+                            console.error(error);
+                        }
+                    });
+                }
+            }
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+}
+
+  $.ajax({
+        error: function (error) {
+            console.error(error);
+        }
+    });
+
+
+  </script>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="jumbotron">
+    <div class="container">
+      <h1>달의 일기장</h1>
+      <div class="posting-box">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="file">
+          <label class="custom-file-label" for="file">사진 선택하기</label>
+        </div>
+        <div class="form-group">
+
+          <input type="email" class="form-control" id="title" placeholder="사진 제목">
+        </div>
+        <div class="form-group">
+
+          <textarea class="form-control" id="content" rows="3" placeholder="내용 입력"></textarea>
+        </div>
+        <button onclick="posting()" type="button" class="btn btn-primary">저장하기</button>
+      </div>
+    </div>
+  </div>
+  <div class="card-columns" id="cards-box">
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
